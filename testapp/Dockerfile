@@ -3,8 +3,6 @@ ARG WITH_XDEBUG=false
 COPY --from=gebler/roadrunner-binary:latest /roadrunner/roadrunner/rr /usr/local/bin/rr
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN chmod +r /etc/app/certs/*
-
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
