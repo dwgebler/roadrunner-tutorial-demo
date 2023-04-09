@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  roadrunner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gebler/roadrunner-binary
+  test:
+    build:
+      context: ./testapp
+      args:
+        WITH_XDEBUG: false
+    image: gebler/roadrunner-test-app
+    container_name: roadrunner-test
+    restart: on-failure
+    volumes:
+        - ./testapp:/app
+        - /app/vendor
+  symfony:
+    build:
+      context: ./symfony
+      args:
+        WITH_XDEBUG: false
+    image: gebler/roadrunner-symfony-app
+    container_name: roadrunner-api
+    restart: on-failure
+    volumes:
+        - ./symfony:/app
+        - /app/vendor

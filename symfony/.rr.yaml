@@ -1,0 +1,23 @@
+version: '3'
+server:
+  command: "php public/index.php"
+  env:
+    - APP_ENV: "dev"
+    - APP_RUNTIME: Runtime\RoadRunnerSymfonyNyholm\Runtime
+http:
+  middleware:
+    - "tls-attributes"
+  address: 0.0.0.0:8081
+  pool:
+    num_workers: 1
+    debug: true
+    max_jobs: 100
+    allocate_timeout: 60s
+    destroy_timeout: 60s
+  ssl:
+    address: 0.0.0.0:8082
+    redirect: false
+    cert: var/certs/localhost.crt
+    key: var/certs/localhost.key
+    root_ca: var/certs/ca.crt
+    client_auth_type: require_and_verify_client_cert
