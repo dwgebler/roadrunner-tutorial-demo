@@ -20,10 +20,10 @@ RUN if [ "$WITH_XDEBUG" = "true" ]; then \
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 WORKDIR /app
-RUN useradd -ms /bin/bash app && chown app:app /app
+COPY composer.json composer.json
+RUN useradd -ms /bin/bash app && chown -R app:app /app
 USER app
 
-COPY composer.json composer.json
 RUN composer install
 
 ENTRYPOINT ["rr", "serve", "--config", "/app/.rr.yaml"]

@@ -2,7 +2,7 @@ FROM golang:1.20-alpine AS builder
 RUN apk update
 RUN apk add git
 WORKDIR /roadrunner
-RUN git clone https://github.com/roadrunner-server/roadrunner.git
+RUN git clone https://github.com/roadrunner-server/roadrunner.git && cd roadrunner && git checkout 9c592e0010bbd456e901d3059341136d1cd0df62
 WORKDIR /roadrunner/plugins
 COPY ./attr ./attr
 WORKDIR /roadrunner/roadrunner
